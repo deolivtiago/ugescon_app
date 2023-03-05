@@ -1,6 +1,4 @@
-# ugescon
-
-A new Flutter project.
+# μGesCon App
 
 ## Getting Started
 
