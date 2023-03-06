@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ui/home/home.dart';
+import '../ui/profile/profile.dart';
 import '../ui/signin/signin.dart';
 import '../ui/signup/signup.dart';
 
@@ -15,6 +17,10 @@ abstract class AppRoutes {
         return SignInPage.route(settings);
       case AppRoutes.signUp:
         return SignUpPage.route(settings);
+      case AppRoutes.home:
+        return HomePage.route(settings);
+      case AppRoutes.profile:
+        return ProfilePage.route(settings);
       default:
         return _errorRoute();
     }
