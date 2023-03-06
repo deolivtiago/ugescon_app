@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'config/config.dart';
 import 'data/repositories/repositories.dart';
 import 'ui/signin/signin.dart';
+import 'ui/signup/signup.dart';
 
 void main() => runApp(const App());
 
@@ -22,6 +23,11 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider<SignInBloc>(
             create: (context) => SignInBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SignUpBloc>(
+            create: (context) => SignUpBloc(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
