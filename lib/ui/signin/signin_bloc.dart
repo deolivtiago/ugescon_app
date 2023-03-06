@@ -6,9 +6,11 @@ import 'signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthRepository authRepository;
+  final CacheRepository cacheRepository;
 
   SignInBloc({
     required this.authRepository,
+    required this.cacheRepository,
   }) : super(Initial()) {
     on<Submit>(_onSubmit);
   }
@@ -21,6 +23,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         'email': event.email,
         'password': event.password,
       });
+
+      await cacheRepository.setAccessToken(authModel.accessToken);
 
       emit(Loaded(user: authModel.user));
     } on HttpError catch (e) {
