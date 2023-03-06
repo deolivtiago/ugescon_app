@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'config/config.dart';
 import 'data/repositories/repositories.dart';
 import 'ui/home/home.dart';
+import 'ui/profile/profile.dart';
 import 'ui/signin/signin.dart';
 import 'ui/signup/signup.dart';
 
@@ -44,6 +45,12 @@ class App extends StatelessWidget {
           ),
           BlocProvider<HomeBloc>(
             create: (context) => HomeBloc(
+              cacheRepository: context.read<CacheRepository>(),
+            ),
+          ),
+          BlocProvider<ProfileBloc>(
+            create: (context) => ProfileBloc(
+              userRepository: context.read<UserRepository>(),
               cacheRepository: context.read<CacheRepository>(),
             ),
           ),
