@@ -22,6 +22,11 @@ class App extends StatelessWidget {
         RepositoryProvider<CacheRepository>(
           create: (context) => CacheRepository(),
         ),
+        RepositoryProvider<UserRepository>(
+          create: (context) => UserRepository(
+            cacheRepository: context.read<CacheRepository>(),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
