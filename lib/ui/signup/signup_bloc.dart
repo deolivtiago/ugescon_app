@@ -6,9 +6,11 @@ import 'signup_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepository authRepository;
+  final CacheRepository cacheRepository;
 
   SignUpBloc({
     required this.authRepository,
+    required this.cacheRepository,
   }) : super(Initial()) {
     on<Submit>(_onSubmit);
   }
@@ -22,6 +24,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         'email': event.email,
         'password': event.password,
       });
+
+      await cacheRepository.setAccessToken(authModel.accessToken);
 
       emit(Loaded(user: authModel.user));
     } on HttpError catch (e) {
