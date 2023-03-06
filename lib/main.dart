@@ -13,7 +13,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'μGesCon',
       theme: AppTheme.light,
-      home: const Scaffold(),
+      initialRoute: AppRoutes.signUp,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
