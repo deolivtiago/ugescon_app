@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../ui/signin/signin.dart';
+import '../ui/signup/signup.dart';
 
 abstract class AppRoutes {
   static const home = '/';
@@ -12,6 +13,8 @@ abstract class AppRoutes {
     switch (settings.name) {
       case AppRoutes.signIn:
         return SignInPage.route(settings);
+      case AppRoutes.signUp:
+        return SignUpPage.route(settings);
       default:
         return _errorRoute();
     }
