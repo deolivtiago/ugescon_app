@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../ui/signin/signin.dart';
+
 abstract class AppRoutes {
+  static const home = '/';
   static const signUp = '/signup';
+  static const signIn = '/signin';
+  static const profile = '/profile';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.signIn:
+        return SignInPage.route(settings);
       default:
         return _errorRoute();
     }
