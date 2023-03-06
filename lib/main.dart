@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'config/config.dart';
+import 'data/repositories/repositories.dart';
+import 'ui/signin/signin.dart';
 
 void main() => runApp(const App());
 
@@ -9,12 +12,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'μGesCon',
-      theme: AppTheme.light,
-      initialRoute: AppRoutes.signUp,
-      onGenerateRoute: AppRoutes.onGenerateRoute,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(
+          create: (context) => AuthRepository(),
+        ),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<SignInBloc>(
+            create: (context) => SignInBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'μGesCon',
+          theme: AppTheme.light,
+          initialRoute: AppRoutes.signIn,
+          onGenerateRoute: AppRoutes.onGenerateRoute,
+        ),
+      ),
     );
   }
 }
