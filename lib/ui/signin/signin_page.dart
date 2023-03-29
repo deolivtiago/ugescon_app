@@ -10,7 +10,7 @@ import 'signin_state.dart';
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
-  static Route<void> route(RouteSettings settings) {
+  static Route route(RouteSettings settings) {
     return MaterialPageRoute(
       settings: settings,
       builder: (_) => const SignInPage(),
@@ -167,17 +167,20 @@ class _SignInPageState extends State<SignInPage> {
                                             MediaQuery.of(context).size.width,
                                         height: 56,
                                         child: ElevatedButton(
-                                          onPressed: () => context
-                                              .read<SignInBloc>()
-                                              .add(Submit(
-                                                email: _ecEmail.text,
-                                                password: _ecPassword.text,
-                                              )),
-                                          child: const SizedBox(
-                                            child: Text(
-                                              'ENTRAR',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context
+                                                  .read<SignInBloc>()
+                                                  .add(SignInSubmitEvent(
+                                                    email: _ecEmail.text,
+                                                    password: _ecPassword.text,
+                                                  ));
+                                            }
+                                          },
+                                          child: const Text(
+                                            'ENTRAR',
+                                            style: TextStyle(fontSize: 18),
                                           ),
                                         ),
                                       ),

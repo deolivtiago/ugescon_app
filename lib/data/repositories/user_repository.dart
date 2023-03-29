@@ -33,6 +33,8 @@ class UserRepository {
     switch (response.statusCode) {
       case 201:
         return UserModel.fromMap(json.decode(response.body)['data']);
+      case 422:
+        throw HttpError.fromMap(json.decode(response.body)['errors']);
       default:
         throw UnimplementedError();
     }
@@ -54,6 +56,8 @@ class UserRepository {
     switch (response.statusCode) {
       case 200:
         return UserModel.fromMap(json.decode(response.body)['data']);
+      case 422:
+        throw HttpError.fromMap(json.decode(response.body)['errors']);
       default:
         throw UnimplementedError();
     }
@@ -73,6 +77,8 @@ class UserRepository {
     switch (response.statusCode) {
       case 204:
         break;
+      case 422:
+        throw HttpError.fromMap(json.decode(response.body)['errors']);
       default:
         throw UnimplementedError();
     }

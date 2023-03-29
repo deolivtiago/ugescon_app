@@ -1,4 +1,9 @@
+export 'account_repository.dart';
 export 'auth_repository.dart';
 export 'cache_repository.dart';
+export 'entry_repository.dart';
 export 'exceptions/http_error.dart';
+export 'financial_statements_repository.dart';
+export 'location_repository.dart';
+export 'organization_repository.dart';
 export 'user_repository.dart';

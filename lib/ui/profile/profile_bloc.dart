@@ -12,11 +12,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.userRepository,
     required this.cacheRepository,
   }) : super(Initial()) {
-    on<Submit>(_onSubmit);
-    on<Delete>(_onDelete);
+    on<ProfileSubmitEvent>(_onSubmit);
+    on<ProfileDeleteEvent>(_onDelete);
   }
 
-  void _onSubmit(Submit event, Emitter<ProfileState> emit) async {
+  void _onSubmit(ProfileSubmitEvent event, Emitter<ProfileState> emit) async {
     emit(Loading());
 
     try {
@@ -35,7 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  void _onDelete(Delete event, Emitter<ProfileState> emit) async {
+  void _onDelete(ProfileDeleteEvent event, Emitter<ProfileState> emit) async {
     emit(Loading());
 
     try {
