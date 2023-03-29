@@ -9,13 +9,13 @@ abstract class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class Submit extends ProfileEvent {
+class ProfileSubmitEvent extends ProfileEvent {
   final UserModel user;
   final String name;
   final String email;
   final String password;
 
-  const Submit({
+  const ProfileSubmitEvent({
     required this.user,
     required this.name,
     required this.email,
@@ -23,8 +23,8 @@ class Submit extends ProfileEvent {
   });
 }
 
-class Delete extends ProfileEvent {
+class ProfileDeleteEvent extends ProfileEvent {
   final UserModel user;
 
-  const Delete({required this.user});
+  const ProfileDeleteEvent({required this.user});
 }

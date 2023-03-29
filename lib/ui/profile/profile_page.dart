@@ -16,7 +16,7 @@ class ProfilePage extends StatefulWidget {
     super.key,
   });
 
-  static Route<void> route(RouteSettings settings) {
+  static Route route(RouteSettings settings) {
     final user = settings.arguments == null
         ? UserModel.empty()
         : settings.arguments as UserModel;
@@ -90,7 +90,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ).then((isConfirmed) {
                   if (isConfirmed ?? false) {
-                    context.read<ProfileBloc>().add(Delete(user: widget.user));
+                    context
+                        .read<ProfileBloc>()
+                        .add(ProfileDeleteEvent(user: widget.user));
                   }
                 });
               },
@@ -311,16 +313,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                             MediaQuery.of(context).size.width,
                                         height: 56,
                                         child: ElevatedButton(
-                                          onPressed: () => context
-                                              .read<ProfileBloc>()
-                                              .add(
-                                                Submit(
-                                                  user: widget.user,
-                                                  name: _ecName.text,
-                                                  email: _ecEmail.text,
-                                                  password: _ecPassword.text,
-                                                ),
-                                              ),
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context.read<ProfileBloc>().add(
+                                                    ProfileSubmitEvent(
+                                                      user: widget.user,
+                                                      name: _ecName.text,
+                                                      email: _ecEmail.text,
+                                                      password:
+                                                          _ecPassword.text,
+                                                    ),
+                                                  );
+                                            }
+                                          },
                                           child: const SizedBox(
                                             child: Text(
                                               'ALTERAR',

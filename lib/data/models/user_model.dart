@@ -2,19 +2,25 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import 'models.dart';
+
 class UserModel implements Equatable {
   final String id;
   final String name;
   final String email;
+  final OrganizationModel organization;
 
-  UserModel({
+  const UserModel({
     required this.id,
     required this.name,
     required this.email,
+    required this.organization,
   });
 
   @override
-  List<Object?> get props => [id, name, email];
+  List<Object?> get props {
+    return [id, name, email, organization];
+  }
 
   @override
   bool? get stringify => true;
@@ -23,21 +29,31 @@ class UserModel implements Equatable {
     String? id,
     String? name,
     String? email,
+    OrganizationModel? organization,
   }) {
     return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
+      organization: organization ?? this.organization,
     );
   }
 
-  factory UserModel.empty() => UserModel(id: '', name: '', email: '');
+  factory UserModel.empty() {
+    return UserModel(
+      id: '',
+      name: '',
+      email: '',
+      organization: OrganizationModel.empty(),
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
       'email': email,
+      'organization': organization.name.isEmpty ? null : organization.toMap(),
     };
   }
 
@@ -46,6 +62,9 @@ class UserModel implements Equatable {
       id: map['id'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
+      organization: map['person'] == null
+          ? OrganizationModel.empty()
+          : OrganizationModel.fromMap(map['person']),
     );
   }
 
@@ -53,4 +72,9 @@ class UserModel implements Equatable {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, name: $name, email: $email, organization: $organization)';
+  }
 }

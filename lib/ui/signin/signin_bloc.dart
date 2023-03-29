@@ -12,10 +12,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     required this.authRepository,
     required this.cacheRepository,
   }) : super(Initial()) {
-    on<Submit>(_onSubmit);
+    on<SignInSubmitEvent>(_onSubmit);
   }
 
-  void _onSubmit(Submit event, Emitter<SignInState> emit) async {
+  void _onSubmit(SignInSubmitEvent event, Emitter<SignInState> emit) async {
     emit(Loading());
 
     try {
