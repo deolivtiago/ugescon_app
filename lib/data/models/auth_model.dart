@@ -59,4 +59,8 @@ class AuthModel implements Equatable {
 
   factory AuthModel.fromJson(String source) =>
       AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() =>
+      'AuthModel(accessToken: $accessToken, refreshToken: $refreshToken, user: $user)';
 }

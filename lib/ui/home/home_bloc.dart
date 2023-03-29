@@ -8,10 +8,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final CacheRepository cacheRepository;
 
   HomeBloc({required this.cacheRepository}) : super(Initial()) {
-    on<SignOut>(_onSignOut);
+    on<HomeSignOutEvent>(_onSignOut);
   }
 
-  void _onSignOut(SignOut event, Emitter<HomeState> emit) async {
+  void _onSignOut(HomeSignOutEvent event, Emitter<HomeState> emit) async {
     emit(Loading());
 
     try {

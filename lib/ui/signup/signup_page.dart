@@ -10,7 +10,7 @@ import 'signup_state.dart';
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
-  static Route<void> route(RouteSettings settings) {
+  static Route route(RouteSettings settings) {
     return MaterialPageRoute(
       settings: settings,
       builder: (_) => const SignUpPage(),
@@ -235,13 +235,18 @@ class _SignUpPageState extends State<SignUpPage> {
                                             MediaQuery.of(context).size.width,
                                         height: 56,
                                         child: ElevatedButton(
-                                          onPressed: () => context
-                                              .read<SignUpBloc>()
-                                              .add(Submit(
-                                                name: _ecName.text,
-                                                email: _ecEmail.text,
-                                                password: _ecPassword.text,
-                                              )),
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context
+                                                  .read<SignUpBloc>()
+                                                  .add(SignUpSubmitEvent(
+                                                    name: _ecName.text,
+                                                    email: _ecEmail.text,
+                                                    password: _ecPassword.text,
+                                                  ));
+                                            }
+                                          },
                                           child: const SizedBox(
                                             child: Text(
                                               'CADASTRAR',
